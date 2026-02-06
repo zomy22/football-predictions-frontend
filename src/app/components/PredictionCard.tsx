@@ -25,9 +25,10 @@ interface Prediction {
 
 interface PredictionCardProps {
   prediction: Prediction;
+  showOutcome?: boolean;
 }
 
-const PredictionCard: React.FC<PredictionCardProps> = ({ prediction }) => {
+const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, showOutcome = true }) => {
   const {
     league_name,
     home_team_name,
@@ -62,8 +63,8 @@ const PredictionCard: React.FC<PredictionCardProps> = ({ prediction }) => {
   return (
     <div className="relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
 
-      {/* Outcome badge */}
-      {outcome && (
+      {/* Outcome badge (controlled by showOutcome prop) */}
+      {showOutcome && outcome && (
         <span
           className={`absolute top-3 right-3 text-xs font-semibold px-2 py-1 rounded-full
           ${
