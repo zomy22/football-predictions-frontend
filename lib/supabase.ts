@@ -54,8 +54,8 @@ export async function getPredictionsByDate(date: string): Promise<Prediction[] |
         away_team_name,
         home_team_logo,
         away_team_logo,
-        goals_home_result,
-        goals_away_result
+        goals_home,
+        goals_away
       )
     `)
     .eq('prediction_date', date);
