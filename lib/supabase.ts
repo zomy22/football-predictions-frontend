@@ -36,6 +36,8 @@ export interface Prediction {
   outcome: string | null;
   home_team_logo?: string; // Flattened from fixtures
   away_team_logo?: string; // Flattened from fixtures
+  goals_home?: string | number | null;
+  goals_away?: string | number | null;
 }
 
 
@@ -51,7 +53,9 @@ export async function getPredictionsByDate(date: string): Promise<Prediction[] |
         home_team_name,
         away_team_name,
         home_team_logo,
-        away_team_logo
+        away_team_logo,
+        goals_home,
+        goals_away
       )
     `)
     .eq('prediction_date', date);
@@ -70,6 +74,14 @@ export async function getPredictionsByDate(date: string): Promise<Prediction[] |
     away_team_name: prediction.fixtures?.away_team_name || prediction.away_team_name,
     home_team_logo: prediction.fixtures?.home_team_logo || prediction.home_team_logo,
     away_team_logo: prediction.fixtures?.away_team_logo || prediction.away_team_logo,
+    // Use prediction-level result fields when present, otherwise fixture goals
+    // `goals_home_result` / `away_goals_result` may contain string values
+    goals_home: (
+      prediction.goals_home_result ?? prediction.goals_home ?? prediction.fixtures?.goals_home ?? null
+    ),
+    goals_away: (
+      prediction.away_goals_result ?? prediction.away_goals ?? prediction.fixtures?.goals_away ?? null
+    )
     // Remove the nested fixtures object as it's flattened
     // delete prediction.fixtures // Optional, if you want to clean up the object
   }));

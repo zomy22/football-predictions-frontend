@@ -13,8 +13,8 @@ interface Prediction {
   kickoff_time?: string; // "19:45"
   status?: 'NS' | 'LIVE' | 'FT';
 
-  home_goals?: number | null;
-  away_goals?: number | null;
+  goals_home_result?: number | null;
+  goals_away_result?: number | null;
 
   prediction_selection: string;
   prediction_raw_advice: string;
@@ -37,8 +37,8 @@ const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, showOutcome
     away_team_logo,
     kickoff_time,
     status = 'NS',
-    home_goals,
-    away_goals,
+    goals_home_result,
+    goals_away_result,
     prediction_selection,
     prediction_confidence,
     outcome
@@ -105,8 +105,8 @@ const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, showOutcome
         </div>
 
         <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
-          {status === 'FT' || status === 'LIVE'
-            ? `${home_goals ?? 0} – ${away_goals ?? 0}`
+          {(goals_home_result != null || goals_away_result != null)
+            ? `${goals_home_result ?? 0} – ${goals_away_result ?? 0}`
             : 'vs'}
         </div>
 
