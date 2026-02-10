@@ -36,8 +36,8 @@ export interface Prediction {
   outcome: string | null;
   home_team_logo?: string; // Flattened from fixtures
   away_team_logo?: string; // Flattened from fixtures
-  goals_home?: string | number | null;
-  goals_away?: string | number | null;
+  goals_home_result?: string | number | null;
+  goals_away_result?: string | number | null;
 }
 
 
@@ -54,8 +54,8 @@ export async function getPredictionsByDate(date: string): Promise<Prediction[] |
         away_team_name,
         home_team_logo,
         away_team_logo,
-        goals_home,
-        goals_away
+        goals_home_result,
+        goals_away_result
       )
     `)
     .eq('prediction_date', date);
