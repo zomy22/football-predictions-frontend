@@ -36,8 +36,8 @@ export interface Prediction {
   outcome: string | null;
   home_team_logo?: string; // Flattened from fixtures
   away_team_logo?: string; // Flattened from fixtures
-  goals_home?: string | number | null;
-  goals_away?: string | number | null;
+  goals_home_result?: string | number | null;
+  goals_away_result?: string | number | null;
 }
 
 
