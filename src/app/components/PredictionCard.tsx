@@ -12,9 +12,13 @@ interface Prediction {
 
   kickoff_time?: string; // "19:45"
   status?: 'NS' | 'LIVE' | 'FT';
-
-  home_goals?: number | null;
-  away_goals?: number | null;
+// goals_home and goals_away are not available in the predictions table
+// they need to be obtained from the fixtures table using the fixture_id
+  goals_home?: number | null;
+  goals_away?: number | null;
+  // goals may come as strings (e.g. "2 (ET)") or numbers
+  goals_home?: string | number | null;
+  goals_away?: string | number | null;
 
   prediction_selection: string;
   prediction_raw_advice: string;
@@ -37,8 +41,8 @@ const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, showOutcome
     away_team_logo,
     kickoff_time,
     status = 'NS',
-    home_goals,
-    away_goals,
+    goals_home,
+    goals_away,
     prediction_selection,
     prediction_confidence,
     outcome
@@ -105,8 +109,8 @@ const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, showOutcome
         </div>
 
         <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
-          {status === 'FT' || status === 'LIVE'
-            ? `${home_goals ?? 0} – ${away_goals ?? 0}`
+          {(goals_home != null || goals_away != null)
+            ? `${goals_home ?? 0} – ${goals_away ?? 0}`
             : 'vs'}
         </div>
 
