@@ -12,13 +12,9 @@ interface Prediction {
 
   kickoff_time?: string; // "19:45"
   status?: 'NS' | 'LIVE' | 'FT';
-// goals_home and goals_away are not available in the predictions table
-// they need to be obtained from the fixtures table using the fixture_id
+
   goals_home?: number | null;
   goals_away?: number | null;
-  // goals may come as strings (e.g. "2 (ET)") or numbers
-  goals_home?: string | number | null;
-  goals_away?: string | number | null;
 
   prediction_selection: string;
   prediction_raw_advice: string;
